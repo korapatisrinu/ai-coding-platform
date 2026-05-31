@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Dashboard — SSB Coding Platform</title>
+
+<link rel="icon" href="/static/media/logo.jpeg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+html, body{
+height:100%;
+margin:0;
+font-family:'Segoe UI', sans-serif;
+color:#e5e7eb;
+display:flex;
+flex-direction:column;
+}
+
+/* BACKGROUND VIDEO */
+
+.bg-video{
+position:fixed;
+right:0;
+bottom:0;
+min-width:100%;
+min-height:100%;
+object-fit:cover;
+z-index:-2;
+}
+
+body::after{
+content:"";
+position:fixed;
+inset:0;
+background:rgba(15,23,42,0.75);
+z-index:-1;
+}
+
+/* NAVBAR */
+
+.navbar-custom{
+background:#1f2937;
+border-bottom:1px solid #2d3748;
+}
+
+.nav-btn{
+background:#2563EB;
+color:white;
+border:none;
+border-radius:6px;
+padding:6px 16px;
+}
+
+.nav-btn:hover{
+background:#1D4ED8;
+color:white;
+}
+
+/* MAIN */
+
+.main-content{
+flex:1;
+padding-top:40px;
+padding-bottom:60px;
+}
+
+/* CARD */
+
+.card-custom{
+background:#1f2937;
+border-radius:12px;
+padding:28px;
+border:1px solid #2d3748;
+}
+
+/* STATS */
+
+.stat-number{
+font-size:2rem;
+font-weight:700;
+}
+
+/* PRACTICE CARDS */
+
+.course-card{
+background:#1f2937;
+border:1px solid #2d3748;
+border-radius:12px;
+padding:30px;
+text-align:center;
+}
+
+.course-card h4{
+margin-bottom:10px;
+}
+
+.course-card p{
+color:#9ca3af;
+}
+
+/* FOOTER */
+
+footer{
+background:#1f2937;
+border-top:1px solid #2d3748;
+padding:14px 0;
+font-size:0.85rem;
+color:#9ca3af;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND VIDEO -->
+
+<video autoplay muted loop playsinline class="bg-video">
+<source src="/static/media/P.mp4" type="video/mp4">
+</video>
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+<div class="container">
+
+<a class="navbar-brand d-flex align-items-center text-white fw-bold" href="/dashboard">
+<img src="/static/media/logo.jpeg"
+width="45"
+height="45"
+class="me-2 rounded-circle">
+SSB Coding Platform
+</a>
+
+<div class="ms-auto d-flex gap-2">
+
+{% if session.get('role') == "admin" %}
+<a href="/admin" class="btn nav-btn btn-sm">Admin</a>
+{% endif %}
+
+<a href="/practice" class="btn nav-btn btn-sm">Practice</a>
+
+<a href="/contest/1" class="btn nav-btn btn-sm">Contest</a>
+
+<a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+
+</div>
+
+</div>
+</nav>
+
+<!-- MAIN CONTENT -->
+
+<div class="main-content">
+
+<!-- WELCOME -->
+
+<div class="container mb-4">
+<div class="card-custom text-center">
+<h5 class="text-white">Welcome, {{ session.get('user') }} 👋</h5>
+<small class="text-white">Let's Prepare, Practice and Perform</small>
+</div>
+</div>
+
+<!-- STATS -->
+
+<div class="container mb-5">
+
+<div class="row g-4">
+
+<div class="col-6 col-md-3">
+<div class="card-custom text-center">
+<div class="stat-number">{{ problems|length }}</div>
+<small>Total Problems</small>
+</div>
+</div>
+
+<div class="col-6 col-md-3">
+<div class="card-custom text-center">
+<div class="stat-number text-success">{{ solved }}</div>
+<small>Solved</small>
+</div>
+</div>
+
+<div class="col-6 col-md-3">
+<div class="card-custom text-center">
+<div class="stat-number text-warning">{{ pending }}</div>
+<small>Pending</small>
+</div>
+</div>
+
+<div class="col-6 col-md-3">
+<div class="card-custom text-center">
+<div class="stat-number text-info">{{ performance }}%</div>
+<small>Performance</small>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- PRACTICE COURSES -->
+
+<div class="container">
+
+<h3 class="text-center mb-4">Available Practice Courses</h3>
+
+<div class="row justify-content-center g-4">
+
+<!-- PYTHON -->
+
+<div class="col-md-4">
+<div class="course-card">
+
+<h4>Python</h4>
+
+<p>Practice Python programming problems</p>
+
+<a href="/practice" class="btn btn-primary">
+Start Practice
+</a>
+
+</div>
+</div>
+
+<!-- JAVA -->
+
+<div class="col-md-4">
+<div class="course-card">
+
+<h4>Java</h4>
+
+<p>Practice Java programming problems</p>
+
+<a href="/practice" class="btn btn-primary">
+Start Practice
+</a>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer class="text-center">
+
+<small>
+© 2026 SSB Coding Platform. All rights reserved.
+</small>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
